@@ -10,9 +10,8 @@ public class CommandLine {
         // Utility classes should not have public constructors
     }
 
-    // private static final String PASSWORD = "password";
+    private static final String PASSWORD = "password";
     public static void addData() {
-
         StudentService studentService = new StudentService();
         CourseService courseService = new CourseService();
         String instructorPhillip = "Phillip Witkin";
@@ -27,7 +26,5 @@ public class CommandLine {
         courseService.createCourse(new Course("JPA", "Jafer Alhaboubi"));
         courseService.createCourse(new Course("Spring Framework", instructorPhillip));
         courseService.createCourse(new Course("SQL", instructorPhillip));
-
-
     }
 }
