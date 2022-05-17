@@ -1,6 +1,5 @@
 package sba.sms.services;
 
-
 import lombok.extern.java.Log;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
