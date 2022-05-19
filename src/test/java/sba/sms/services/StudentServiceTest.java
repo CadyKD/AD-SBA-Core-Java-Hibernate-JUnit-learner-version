@@ -5,9 +5,8 @@ import lombok.experimental.FieldDefaults;
 import org.junit.jupiter.api.*;
 import sba.sms.models.Student;
 import sba.sms.utils.CommandLine;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+
+import java.util.*;
 
 @FieldDefaults(level = AccessLevel.PRIVATE)
 class StudentServiceTest {
@@ -39,7 +38,9 @@ class StudentServiceTest {
 				new Student("ariadna@gmail.com", "ariadna ramirez", "password"),
 				new Student("bolaji@gmail.com", "bolaji saibu", "password")
 		));
+		expected.sort(Comparator.comparing(Student::getEmail));
 		List<Student> actual = studentService.getAllStudents();
+		actual.sort(Comparator.comparing(Student::getEmail));
 		Assertions.assertEquals(expected, actual);
 	}
 	
@@ -67,16 +68,4 @@ class StudentServiceTest {
 	void validateStudent() {
 		Assertions.assertTrue(studentService.validateStudent("reema@gmail.com", "password"));
 	}
-
-//	@Test
-//	@Order(5)
-//	@DisplayName("Register Student To Course")
-//	void registerStudentToCourse() {
-//	}
-//
-//	@Test
-//	@Order(6)
-//	@DisplayName("Get Student Courses")
-//	void getStudentCourses() {
-//	}
 }
