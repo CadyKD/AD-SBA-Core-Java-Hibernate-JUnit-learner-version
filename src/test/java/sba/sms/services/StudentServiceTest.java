@@ -2,19 +2,12 @@ package sba.sms.services;
 
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
-import org.junit.Assert;
 import org.junit.jupiter.api.*;
 import sba.sms.models.Student;
 import sba.sms.utils.CommandLine;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
 
 @FieldDefaults(level = AccessLevel.PRIVATE)
 class StudentServiceTest {
@@ -31,9 +24,13 @@ class StudentServiceTest {
 		CommandLine.addData();
 	}
 	
+	@AfterEach
+	void tearDown() {
+	}
+	
 	@Test
 	@Order(1)
-	@DisplayName("Get All Employees")
+	@DisplayName("Get All Students")
 	void getAllStudents() {
 		List<Student> expected = new ArrayList<>(Arrays.asList(
 				new Student("reema@gmail.com", "reema brown", "password"),
@@ -43,31 +40,43 @@ class StudentServiceTest {
 				new Student("bolaji@gmail.com", "bolaji saibu", "password")
 		));
 		List<Student> actual = studentService.getAllStudents();
-		assertEquals(expected.size(), actual.size());
+		Assertions.assertEquals(expected, actual);
 	}
 	
+	@Test
+	@Order(2)
+	@DisplayName("Create Student")
+	void createStudent() {
+		Student expected = new Student("reema@gmail.com", "reema brown", "password");
+		Student actual = new Student("reema@gmail.com", "reema brown", "password");
+		Assertions.assertEquals(expected, actual);
+	}
+
+	@Test
+	@Order(3)
+	@DisplayName("Get Student By Email")
+	void getStudentByEmail() {
+		Student expected = new Student("reema@gmail.com", "reema brown", "password");
+		Student actual = studentService.getStudentByEmail("reema@gmail.com");
+		Assertions.assertEquals(expected, actual);
+	}
+
+	@Test
+	@Order(4)
+	@DisplayName("Validate Student")
+	void validateStudent() {
+		Assertions.assertTrue(studentService.validateStudent("reema@gmail.com", "password"));
+	}
+
 //	@Test
-//	void createStudent() {
-//
-//	}
-//
-//	@Test
-//	void getStudentByEmail() {
-//	}
-//
-//	@Test
-//	void validateStudent() {
-//	}
-//
-//	@Test
+//	@Order(5)
+//	@DisplayName("Register Student To Course")
 //	void registerStudentToCourse() {
 //	}
 //
 //	@Test
+//	@Order(6)
+//	@DisplayName("Get Student Courses")
 //	void getStudentCourses() {
-//	}
-//
-//	@AfterEach
-//	void tearDown() {
 //	}
 }

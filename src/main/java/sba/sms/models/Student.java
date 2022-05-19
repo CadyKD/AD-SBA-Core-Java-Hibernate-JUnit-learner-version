@@ -5,6 +5,7 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Getter
 @Setter
@@ -39,5 +40,23 @@ public class Student {
 		this.email = email;
 		this.name = name;
 		this.password = password;
+	}
+	
+	@Override
+	public String toString() {
+		return "Student{Email:'" + email + "', Name:" + name + "', Password:'" + password + "'}";
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) return true;
+		if (obj == null || getClass() != obj.getClass()) return false;
+		Student other = (Student) obj;
+		return email.equals(other.email) && name.equals(other.name) && password.equals(other.password);
+	}
+	
+	@Override
+	public int hashCode() {
+		return Objects.hash(email, name, password);
 	}
 }
